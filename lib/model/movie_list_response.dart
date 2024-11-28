@@ -74,4 +74,22 @@ class MovieListItem {
       adult: json['adult'] as bool,
     );
   }
+  @override
+  String toString() {
+    return '''
+MovieListItem {
+  id: $id,
+  title: $title,
+  originalTitle: $originalTitle,
+  overview: $overview,
+  posterPath: $posterPath,
+  backdropPath: $backdropPath,
+  releaseDate: $releaseDate,
+  voteAverage: $voteAverage,
+  voteCount: $voteCount,
+  popularity: $popularity,
+  genreIds: $genreIds,
+  adult: $adult
+}''';
+  }
 }
