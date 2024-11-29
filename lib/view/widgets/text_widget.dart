@@ -6,13 +6,20 @@ class TextWidget extends StatelessWidget {
   final Color? textColor;
   final double? textSize;
   final FontWeight? fontWeight;
+  final bool? softWrap;
+  final TextOverflow? textOverflow;
+  final int? maxLines;
 
-  const TextWidget(
-      {super.key,
-      required this.text,
-      this.textColor = Colors.white,
-      this.textSize = 16,
-      this.fontWeight = FontWeight.w400});
+  const TextWidget({
+    super.key,
+    required this.text,
+    this.textColor = Colors.white,
+    this.textSize = 16,
+    this.fontWeight = FontWeight.w400,
+    this.softWrap = true,
+    this.textOverflow = TextOverflow.ellipsis,
+    this.maxLines,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +28,9 @@ class TextWidget extends StatelessWidget {
       style: GoogleFonts.poppins(
           textStyle: TextStyle(
               color: textColor, fontSize: textSize, fontWeight: fontWeight)),
-      softWrap: true,
-      overflow: TextOverflow.ellipsis,
-      maxLines: 2,
+      softWrap: softWrap,
+      overflow: textOverflow,
+      maxLines: maxLines,
     );
   }
 }

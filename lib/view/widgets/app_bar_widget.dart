@@ -7,6 +7,8 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   final Color? backgroundColor;
   final double? textSize;
   final FontWeight? fontWeight;
+  final List<Widget>? actionWidget;
+  final Widget? leadingWidget;
 
   const AppBarWidget(
       {super.key,
@@ -14,11 +16,15 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
       this.titleColor = Colors.black,
       this.backgroundColor = Colors.white,
       this.textSize = 16,
-      this.fontWeight = FontWeight.w600});
+      this.fontWeight = FontWeight.w600,
+      this.actionWidget,
+      this.leadingWidget});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      leading: leadingWidget,
+      actions: actionWidget,
       centerTitle: true,
       backgroundColor: backgroundColor,
       title: Text(

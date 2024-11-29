@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/colors.dart';
-import 'package:movie_app/widgets/text_widget.dart';
+import 'package:movie_app/view/colors.dart';
+import 'package:movie_app/view/widgets/text_widget.dart';
 
 class MovieInforWidget extends StatelessWidget {
   final double height;
@@ -17,7 +17,7 @@ class MovieInforWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: height,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,

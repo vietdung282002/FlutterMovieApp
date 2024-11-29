@@ -18,7 +18,7 @@ class PosterImageWidget extends StatelessWidget {
     return ClipRRect(
         borderRadius: BorderRadius.circular(borderRadius),
         child: Image.network(
-          imageUrl,
+          "https://image.tmdb.org/t/p/w600_and_h900_bestv2$imageUrl",
           fit: BoxFit.cover,
           width: imageWidth,
           height: imageHeight,

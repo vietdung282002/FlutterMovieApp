@@ -31,7 +31,7 @@ class MovieListResponse {
 
 class MovieListItem {
   final bool adult;
-  final String backdropPath;
+  final String? backdropPath;
   final List<int> genreIds;
   final int id;
   final String originalTitle;
@@ -45,7 +45,7 @@ class MovieListItem {
 
   const MovieListItem({
     required this.adult,
-    required this.backdropPath,
+    this.backdropPath,
     required this.genreIds,
     required this.id,
     required this.originalTitle,
@@ -65,7 +65,8 @@ class MovieListItem {
       originalTitle: json['original_title'] as String,
       overview: json['overview'] as String,
       posterPath: json['poster_path'] as String,
-      backdropPath: json['backdrop_path'] as String,
+      backdropPath:
+          json['backdrop_path'] != null ? json['backdrop_path'] as String : '',
       releaseDate: json['release_date'] as String,
       voteAverage: (json['vote_average'] as num).toDouble(),
       voteCount: json['vote_count'] as int,
@@ -73,23 +74,5 @@ class MovieListItem {
       genreIds: List<int>.from(json['genre_ids'] as List),
       adult: json['adult'] as bool,
     );
-  }
-  @override
-  String toString() {
-    return '''
-MovieListItem {
-  id: $id,
-  title: $title,
-  originalTitle: $originalTitle,
-  overview: $overview,
-  posterPath: $posterPath,
-  backdropPath: $backdropPath,
-  releaseDate: $releaseDate,
-  voteAverage: $voteAverage,
-  voteCount: $voteCount,
-  popularity: $popularity,
-  genreIds: $genreIds,
-  adult: $adult
-}''';
   }
 }
