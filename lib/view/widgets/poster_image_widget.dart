@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/constain_values/values.dart';
 
 class PosterImageWidget extends StatelessWidget {
   final String imageUrl;
@@ -17,11 +18,20 @@ class PosterImageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRRect(
         borderRadius: BorderRadius.circular(borderRadius),
-        child: Image.network(
-          "https://image.tmdb.org/t/p/w600_and_h900_bestv2$imageUrl",
+        child: FadeInImage.assetNetwork(
+          placeholder: 'assets/Placeholder.png',
+          image: Values.imageUrl + Values.imageSmall + imageUrl,
           fit: BoxFit.cover,
           width: imageWidth,
           height: imageHeight,
+          imageErrorBuilder: (context, error, stackTrace) {
+            return Image.asset(
+              'assets/images/placeholder.png',
+              fit: BoxFit.cover,
+              width: imageWidth,
+              height: imageWidth,
+            );
+          },
         ));
   }
 }

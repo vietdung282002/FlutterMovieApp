@@ -26,9 +26,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(scaffoldBackgroundColor: backgroundColor),
         initialRoute: '/',
         routes: {
-          // When navigating to the "/" route, build the FirstScreen widget.
           '/': (context) => const HomeScreen(),
-          // When navigating to the "/second" route, build the SecondScreen widget.
           '/detail': (context) => const MovieDetail(),
         },
       ),

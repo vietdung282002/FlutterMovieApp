@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:movie_app/model/data_model/movie_detail_response.dart';
 import 'package:movie_app/model/data_model/movie_list_response.dart';
 // import 'dart:convert' as json;
 
@@ -11,6 +12,17 @@ class ApiServices {
 
     if (response.statusCode == 200) {
       return MovieListResponse.fromJson(
+          jsonDecode(response.body) as Map<String, dynamic>);
+    } else {
+      throw Exception('Failed to load movie');
+    }
+  }
+
+  Future<MovieItem> fetchMovieDetail(int movieId) async {
+    final response =
+        await http.get(ApiUrls().getMovieDetails(movieId: movieId));
+    if (response.statusCode == 200) {
+      return MovieItem.fromJson(
           jsonDecode(response.body) as Map<String, dynamic>);
     } else {
       throw Exception('Failed to load movie');

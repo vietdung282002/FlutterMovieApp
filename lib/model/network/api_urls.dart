@@ -1,13 +1,20 @@
+import 'package:movie_app/constain_values/values.dart';
+
 class ApiUrls {
-  String baseUrls = 'https://api.themoviedb.org/3/movie/';
-  final _apiKey = 'a78465ca31af77ddc48dc5e525d629ba';
-  Uri getMoviesList({int? page}) {
-    baseUrls += 'popular';
+  Uri getMoviesList({required int page}) {
     Map<String, String> queryParams = {
       'page': page.toString(),
-      'api_key': _apiKey
+      'api_key': Values.apiKey
     };
 
-    return Uri.parse(baseUrls).replace(queryParameters: queryParams);
+    return Uri.parse('${Values.baseUrls}popular')
+        .replace(queryParameters: queryParams);
+  }
+
+  Uri getMovieDetails({required int movieId}) {
+    Map<String, String> queryParams = {'api_key': Values.apiKey};
+
+    return Uri.parse('${Values.baseUrls}$movieId')
+        .replace(queryParameters: queryParams);
   }
 }

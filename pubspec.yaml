@@ -68,6 +68,7 @@ flutter:
     - assets/Star.png
     - assets/Ticket.png
     - assets/Vector.png
+    - assets/Placeholder.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

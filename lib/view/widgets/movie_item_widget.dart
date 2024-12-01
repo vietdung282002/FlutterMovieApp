@@ -15,7 +15,7 @@ class MovieItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/detail');
+        Navigator.pushNamed(context, '/detail', arguments: movieListItem.id);
       },
       child: SizedBox(
         height: itemHeight,
@@ -45,21 +45,19 @@ class MovieItemWidget extends StatelessWidget {
                         MovieInforWidget(
                           height: itemHeight * 18 / 120,
                           imageUrl: 'assets/Star.png',
-                          content: movieListItem.voteAverage.toString(),
+                          content: movieListItem.formattedVoteAverage,
                           color: textColor3,
                         ),
                         MovieInforWidget(
                           height: itemHeight * 18 / 120,
                           imageUrl: 'assets/Ticket.png',
-                          content: movieListItem.genreIds.isNotEmpty
-                              ? movieListItem.genreIds[0].toString()
-                              : 'Unknown Genre',
+                          content: "Action",
                           color: textColor2,
                         ),
                         MovieInforWidget(
                           height: itemHeight * 18 / 120,
                           imageUrl: 'assets/CalendarBlank.png',
-                          content: movieListItem.releaseDate,
+                          content: movieListItem.releaseYear,
                           color: textColor2,
                         ),
                         MovieInforWidget(

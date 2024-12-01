@@ -58,6 +58,12 @@ class MovieListItem {
     required this.voteCount,
   });
 
+  String get formattedVoteAverage => voteAverage.toStringAsFixed(1);
+
+  String get releaseYear {
+    return releaseDate.split('-').first;
+  }
+
   factory MovieListItem.fromJson(Map<String, dynamic> json) {
     return MovieListItem(
       id: json['id'] as int,

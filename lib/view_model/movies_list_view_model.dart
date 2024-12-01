@@ -16,7 +16,6 @@ class MoviesListViewModel extends ChangeNotifier {
 
   Future<void> fetchMoviesList(
       {bool loadMore = false, bool refresh = false}) async {
-    print(loadMore && !_hasMore);
     if (_isLoading) return;
 
     if (refresh) {
@@ -31,11 +30,12 @@ class MoviesListViewModel extends ChangeNotifier {
     notifyListeners();
 
     try {
-      final fetchedMovies = await _apiServices.fetchMovieList(_currentPage);
-      if (fetchedMovies.movieList.isEmpty) {
+      final moviesListResponse =
+          await _apiServices.fetchMovieList(_currentPage);
+      if (moviesListResponse.movieList.isEmpty) {
         _hasMore = false;
       } else {
-        _items.addAll(fetchedMovies.movieList);
+        _items.addAll(moviesListResponse.movieList);
         _currentPage++;
       }
     } catch (e) {
