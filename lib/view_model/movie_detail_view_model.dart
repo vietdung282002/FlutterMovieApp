@@ -19,8 +19,6 @@ class MovieDetailViewModel extends ChangeNotifier {
       _movieItem = null;
     }
 
-    print(1235);
-
     _isLoading = true;
 
     try {

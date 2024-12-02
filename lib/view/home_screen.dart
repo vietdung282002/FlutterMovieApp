@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
-          _scrollController.position.maxScrollExtent - 5) {
+          _scrollController.position.maxScrollExtent) {
         Provider.of<MoviesListViewModel>(context, listen: false)
             .fetchMoviesList(loadMore: true);
       }

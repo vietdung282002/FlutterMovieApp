@@ -10,7 +10,6 @@ class MoviesListViewModel extends ChangeNotifier {
 
   int _currentPage = 1;
   bool _isLoading = false;
-  bool _hasMore = true;
 
   bool get isLoading => _isLoading;
 
@@ -21,10 +20,7 @@ class MoviesListViewModel extends ChangeNotifier {
     if (refresh) {
       _items = [];
       _currentPage = 1;
-      _hasMore = true;
     }
-
-    if (loadMore && !_hasMore) return;
 
     _isLoading = true;
     notifyListeners();
@@ -32,9 +28,7 @@ class MoviesListViewModel extends ChangeNotifier {
     try {
       final moviesListResponse =
           await _apiServices.fetchMovieList(_currentPage);
-      if (moviesListResponse.movieList.isEmpty) {
-        _hasMore = false;
-      } else {
+      if (moviesListResponse.movieList.isNotEmpty) {
         _items.addAll(moviesListResponse.movieList);
         _currentPage++;
       }
