@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/view/colors.dart';
 import 'package:movie_app/model/data_model/movie_list_response.dart';
+import 'package:movie_app/view/screen/movie_detail.dart';
 import 'package:movie_app/view/widgets/movie_infor_widget.dart';
 import 'package:movie_app/view/widgets/poster_image_widget.dart';
 import 'package:movie_app/view/widgets/text_widget.dart';
@@ -15,7 +16,14 @@ class MovieItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/detail', arguments: movieListItem.id);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => MovieDetailScreen(
+              movieId: movieListItem.id,
+            ),
+          ),
+        );
       },
       child: SizedBox(
         height: itemHeight,

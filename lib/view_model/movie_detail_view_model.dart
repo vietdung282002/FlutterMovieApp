@@ -5,7 +5,6 @@ import 'package:movie_app/model/network/api_services.dart';
 
 class MovieDetailViewModel extends ChangeNotifier {
   final ApiServices _apiServices = ApiServices();
-  final int movieId;
 
   MovieItem? _movieItem;
   MovieItem? get movieItem => _movieItem;
@@ -13,9 +12,7 @@ class MovieDetailViewModel extends ChangeNotifier {
   LoadingState _isLoading = LoadingState.idle;
   LoadingState get isLoading => _isLoading;
 
-  MovieDetailViewModel(this.movieId);
-
-  Future<void> fetchMovieDetail({bool refresh = false}) async {
+  Future<void> fetchMovieDetail(int movieId, {bool refresh = false}) async {
     if (_isLoading == LoadingState.loading) return;
     if (refresh) {
       _movieItem = null;
