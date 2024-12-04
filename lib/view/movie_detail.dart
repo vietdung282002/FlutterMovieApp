@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:movie_app/constain_values/values.dart';
+import 'package:movie_app/model/enum/loading_state.dart';
+import 'package:movie_app/utils/values.dart';
 import 'package:movie_app/view/colors.dart';
+import 'package:movie_app/view/widgets/alert_dialog_widget.dart';
 import 'package:movie_app/view/widgets/app_bar_widget.dart';
 import 'package:movie_app/view/widgets/movie_infor_widget.dart';
 import 'package:movie_app/view/widgets/poster_image_widget.dart';
@@ -32,11 +34,21 @@ class _MovieDetailState extends State<MovieDetail> {
       create: (_) => MovieDetailViewModel(movieId)..fetchMovieDetail(),
       child: Consumer<MovieDetailViewModel>(
         builder: (context, viewModel, child) {
-          if (viewModel.movieItem == null && viewModel.isLoading) {
+          if (viewModel.movieItem == null &&
+              viewModel.isLoading == LoadingState.loading) {
             return const Center(
               child: CircularProgressIndicator(),
             );
           }
+          if (viewModel.isLoading == LoadingState.failure) {
+            return AlertDialogWidget(
+              content: "Fail to load movie",
+              onTap: () {
+                Navigator.pop(context);
+              },
+            );
+          }
+
           return Scaffold(
             appBar: AppBarWidget(
               leadingWidget: IconButton(
@@ -152,7 +164,7 @@ class _MovieDetailState extends State<MovieDetail> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               MovieInforWidget(
-                                  height: 16,
+                                  height: 20,
                                   imageUrl: "assets/CalendarBlank.png",
                                   content: viewModel.movieItem!.releaseYear),
                               Padding(
@@ -161,7 +173,7 @@ class _MovieDetailState extends State<MovieDetail> {
                                 child: Image.asset("assets/Vector.png"),
                               ),
                               MovieInforWidget(
-                                  height: 16,
+                                  height: 20,
                                   imageUrl: "assets/Clock.png",
                                   content:
                                       viewModel.movieItem!.formattedRuntime),
@@ -171,7 +183,7 @@ class _MovieDetailState extends State<MovieDetail> {
                                 child: Image.asset("assets/Vector.png"),
                               ),
                               MovieInforWidget(
-                                  height: 16,
+                                  height: 20,
                                   imageUrl: "assets/Ticket.png",
                                   content: viewModel.movieItem!.genres[0].name),
                             ],

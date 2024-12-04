@@ -1,4 +1,4 @@
-import 'package:movie_app/constain_values/values.dart';
+import 'package:movie_app/utils/values.dart';
 
 class ApiUrls {
   Uri getMoviesList({required int page}) {

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/model/enum/loading_state.dart';
 import 'package:movie_app/view/colors.dart';
+import 'package:movie_app/view/widgets/alert_dialog_widget.dart';
 import 'package:movie_app/view/widgets/app_bar_widget.dart';
 import 'package:movie_app/view/widgets/movie_item_widget.dart';
 import 'package:movie_app/view_model/movies_list_view_model.dart';
@@ -48,18 +50,28 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Consumer<MoviesListViewModel>(
         builder: (context, viewModel, child) {
-          if (viewModel.items.isEmpty && viewModel.isLoading) {
+          if (viewModel.items.isEmpty &&
+              viewModel.isLoading == LoadingState.loading) {
             return const Center(
               child: CircularProgressIndicator(),
             );
           }
-
+          if (viewModel.isLoading == LoadingState.failure) {
+            return AlertDialogWidget(
+              content: "Fail to load movie list",
+              onTap: () {
+                Provider.of<MoviesListViewModel>(context, listen: false)
+                    .fetchMoviesList(loadMore: false);
+              },
+            );
+          }
           return RefreshIndicator(
             onRefresh: () async {
               await viewModel.fetchMoviesList(refresh: true);
             },
             child: ListView.builder(
-              itemCount: viewModel.items.length + (viewModel.isLoading ? 1 : 0),
+              itemCount: viewModel.items.length +
+                  (viewModel.isLoading == LoadingState.loading ? 1 : 0),
               itemBuilder: (context, index) {
                 if (index < viewModel.items.length) {
                   final item = viewModel.items[index];

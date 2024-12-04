@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/model/data_model/movie_detail_response.dart';
+import 'package:movie_app/model/enum/loading_state.dart';
 import 'package:movie_app/model/network/api_services.dart';
 
 class MovieDetailViewModel extends ChangeNotifier {
@@ -9,25 +10,26 @@ class MovieDetailViewModel extends ChangeNotifier {
   MovieItem? _movieItem;
   MovieItem? get movieItem => _movieItem;
 
-  bool _isLoading = false;
+  LoadingState _isLoading = LoadingState.idle;
+  LoadingState get isLoading => _isLoading;
 
   MovieDetailViewModel(this.movieId);
-  bool get isLoading => _isLoading;
 
   Future<void> fetchMovieDetail({bool refresh = false}) async {
+    if (_isLoading == LoadingState.loading) return;
     if (refresh) {
       _movieItem = null;
     }
 
-    _isLoading = true;
+    _isLoading = LoadingState.loading;
 
     try {
       final movieDetailResponse = await _apiServices.fetchMovieDetail(movieId);
       _movieItem = movieDetailResponse;
+      _isLoading = LoadingState.success;
     } catch (e) {
-      print(e);
+      _isLoading = LoadingState.failure;
     } finally {
-      _isLoading = false;
       notifyListeners();
     }
   }
