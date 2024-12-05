@@ -21,8 +21,9 @@ class MoviesListViewModel extends ChangeNotifier {
     if (refresh) {
       _items = [];
       _currentPage = 1;
-    } else
-      _isLoading = LoadingState.loading;
+    } 
+    _isLoading = LoadingState.loading;
+    
     notifyListeners();
 
     try {

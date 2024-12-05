@@ -19,6 +19,7 @@ class MovieDetailViewModel extends ChangeNotifier {
     }
 
     _isLoading = LoadingState.loading;
+    notifyListeners();
 
     try {
       final movieDetailResponse = await _apiServices.fetchMovieDetail(movieId);
