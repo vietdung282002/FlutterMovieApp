@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/constain_values/values.dart';
+import 'package:movie_app/utils/values.dart';
 
 class PosterImageWidget extends StatelessWidget {
   final String imageUrl;

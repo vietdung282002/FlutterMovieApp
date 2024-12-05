@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/view/colors.dart';
-import 'package:movie_app/view/home_screen.dart';
-import 'package:movie_app/view/movie_detail.dart';
+import 'package:movie_app/view/screen/home_screen.dart';
+import 'package:movie_app/view/screen/movie_detail.dart';
 import 'package:movie_app/view_model/movies_list_view_model.dart';
 import 'package:provider/provider.dart';
 

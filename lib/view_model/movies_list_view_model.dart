@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/model/data_model/movie_list_response.dart';
+import 'package:movie_app/model/enum/loading_state.dart';
 import 'package:movie_app/model/network/api_services.dart';
 
 class MoviesListViewModel extends ChangeNotifier {
@@ -9,20 +10,20 @@ class MoviesListViewModel extends ChangeNotifier {
   List<MovieListItem> get items => _items;
 
   int _currentPage = 1;
-  bool _isLoading = false;
+  LoadingState _isLoading = LoadingState.idle;
 
-  bool get isLoading => _isLoading;
+  LoadingState get isLoading => _isLoading;
 
   Future<void> fetchMoviesList(
       {bool loadMore = false, bool refresh = false}) async {
-    if (_isLoading) return;
+    if (_isLoading == LoadingState.loading) return;
 
     if (refresh) {
       _items = [];
       _currentPage = 1;
-    }
-
-    _isLoading = true;
+    } 
+    _isLoading = LoadingState.loading;
+    
     notifyListeners();
 
     try {
@@ -32,10 +33,10 @@ class MoviesListViewModel extends ChangeNotifier {
         _items.addAll(moviesListResponse.movieList);
         _currentPage++;
       }
+      _isLoading = LoadingState.success;
     } catch (e) {
-      print(e);
+      _isLoading = LoadingState.failure;
     } finally {
-      _isLoading = false;
       notifyListeners();
     }
   }
